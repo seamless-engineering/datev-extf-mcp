@@ -1,0 +1,64 @@
+{
+  "name": "@seamless-engineering/datev-extf-mcp",
+  "version": "0.1.0",
+  "description": "MCP server that validates and writes DATEV-Format (EXTF) files locally: Buchungsstapel and Debitoren/Kreditoren, with findings in German and English.",
+  "mcpName": "engineering.seamless/datev-extf",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "datev",
+    "extf",
+    "buchungsstapel",
+    "datev-format",
+    "debitoren",
+    "kreditoren",
+    "accounting"
+  ],
+  "license": "MIT",
+  "author": "seamless.engineering (https://seamless.engineering)",
+  "homepage": "https://github.com/seamless-engineering/datev-extf-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seamless-engineering/datev-extf-mcp.git"
+  },
+  "bugs": "https://github.com/seamless-engineering/datev-extf-mcp/issues",
+  "type": "module",
+  "bin": {
+    "datev-extf-mcp": "dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.10.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm typecheck && pnpm test && pnpm build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.1.0",
+    "@seamless-engineering/datev-extf": "^0.1.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "^2.1.0",
+    "@types/node": "^20.19.43",
+    "typescript": "~5.9.3",
+    "vitest": "^4.1.11"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
