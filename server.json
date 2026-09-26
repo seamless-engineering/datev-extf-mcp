@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "engineering.seamless/datev-extf",
+  "title": "DATEV EXTF",
+  "description": "Validate and write DATEV-Format (EXTF) files locally, with findings in German and English.",
+  "version": "0.1.0",
+  "websiteUrl": "https://seamless.engineering/tools/datev-extf-validator/",
+  "repository": {
+    "url": "https://github.com/seamless-engineering/datev-extf-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@seamless-engineering/datev-extf-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
