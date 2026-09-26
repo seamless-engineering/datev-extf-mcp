@@ -19,23 +19,33 @@
     "url": "https://github.com/seamless-engineering/datev-extf-mcp"
   },
   "license": "MIT",
-  "keywords": ["datev", "extf", "buchungsstapel", "accounting", "bookkeeping", "germany"],
+  "keywords": [
+    "datev",
+    "extf",
+    "buchungsstapel",
+    "accounting",
+    "bookkeeping",
+    "germany"
+  ],
   "server": {
     "type": "node",
     "entry_point": "dist/index.js",
     "mcp_config": {
       "command": "node",
-      "args": ["${__dirname}/dist/index.js"]
+      "args": [
+        "${__dirname}/dist/index.js"
+      ]
     }
   },
-  "tools": [
-    { "name": "validate_datev_extf", "description": "Check a DATEV EXTF file and explain every finding with line and field." },
-    { "name": "explain_datev_finding", "description": "Explain a finding code and how to fix it." },
-    { "name": "write_buchungsstapel", "description": "Write a Buchungsstapel that passes the validator, as Windows-1252." },
-    { "name": "list_datev_columns", "description": "List the Buchungsstapel or Debitoren/Kreditoren columns by position." }
-  ],
   "compatibility": {
-    "platforms": ["darwin", "win32", "linux"],
-    "runtimes": { "node": ">=20.0.0" }
-  }
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  },
+  "tools_generated": true
 }
