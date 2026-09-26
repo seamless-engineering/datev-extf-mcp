@@ -37,6 +37,8 @@ claude mcp add datev-extf -- npx -y @seamless-engineering/datev-extf-mcp
 }
 ```
 
+**Claude Desktop, one click:** download `datev-extf-mcp.mcpb` from the [latest release](https://github.com/seamless-engineering/datev-extf-mcp/releases/latest) and open it. Build it yourself with `./scripts/bundle.sh`.
+
 Relative file paths resolve against the server's working directory, so absolute paths are the safer choice.
 
 ## Tools
@@ -75,6 +77,6 @@ Maintained by [seamless.engineering](https://seamless.engineering) for our own p
 
 ## Releasing
 
-Bump `version` in `package.json` and both versions in `server.json`, commit, then tag and push: `git tag v0.1.1 && git push origin v0.1.1`. The release workflow publishes to npm with provenance via trusted publishing, then to the [MCP Registry](https://registry.modelcontextprotocol.io) as `engineering.seamless/datev-extf`.
+Bump `version` in `package.json`, both versions in `server.json` and the one in `manifest.json`, commit, then tag and push: `git tag v0.1.1 && git push origin v0.1.1`. The release workflow publishes to npm with provenance via trusted publishing, then to the [MCP Registry](https://registry.modelcontextprotocol.io) as `engineering.seamless/datev-extf`.
 
 MIT licence.

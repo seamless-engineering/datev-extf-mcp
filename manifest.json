@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/mcpb/main/dist/mcpb-manifest.schema.json",
+  "manifest_version": "0.4",
+  "name": "datev-extf",
+  "display_name": "DATEV EXTF",
+  "version": "0.1.0",
+  "description": "Validate and write DATEV-Format (EXTF) files locally, with findings in German and English.",
+  "long_description": "Checks DATEV-Format (EXTF) CSV files, Buchungsstapel and Debitoren/Kreditoren, and explains every problem with line, field and a plain-language reason before DATEV rejects the import. Writes booking batches that pass the same checks. Files are read from disk and never leave your machine. Format check, not tax advice. DATEV is a trademark of DATEV eG; this project is not affiliated with DATEV.",
+  "author": {
+    "name": "seamless.engineering",
+    "email": "hello@seamless.engineering",
+    "url": "https://seamless.engineering"
+  },
+  "homepage": "https://seamless.engineering/tools/datev-extf-validator/",
+  "documentation": "https://github.com/seamless-engineering/datev-extf-mcp#readme",
+  "support": "https://github.com/seamless-engineering/datev-extf-mcp/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seamless-engineering/datev-extf-mcp"
+  },
+  "license": "MIT",
+  "keywords": ["datev", "extf", "buchungsstapel", "accounting", "bookkeeping", "germany"],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"]
+    }
+  },
+  "tools": [
+    { "name": "validate_datev_extf", "description": "Check a DATEV EXTF file and explain every finding with line and field." },
+    { "name": "explain_datev_finding", "description": "Explain a finding code and how to fix it." },
+    { "name": "write_buchungsstapel", "description": "Write a Buchungsstapel that passes the validator, as Windows-1252." },
+    { "name": "list_datev_columns", "description": "List the Buchungsstapel or Debitoren/Kreditoren columns by position." }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=20.0.0" }
+  }
+}
