@@ -1,0 +1,44 @@
+name: Release
+
+# Push a tag like v0.1.1 to publish that version to npm and the MCP Registry.
+# npm uses trusted publishing (OIDC), so there's no npm token in the repo
+# secrets. The MCP Registry login proves ownership of seamless.engineering
+# with the key whose public half is served at
+# https://seamless.engineering/.well-known/mcp-registry-auth.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - name: Tag matches package.json and server.json
+        run: |
+          test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+          test "v$(node -p 'require("./server.json").version')" = "$GITHUB_REF_NAME"
+          test "v$(node -p 'require("./server.json").packages[0].version')" = "$GITHUB_REF_NAME"
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: npm publish
+      - name: Install mcp-publisher
+        run: curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz mcp-publisher
+      - name: Publish to the MCP Registry
+        env:
+          MCP_REGISTRY_KEY: ${{ secrets.MCP_REGISTRY_KEY }}
+        run: |
+          ./mcp-publisher login http --domain seamless.engineering --private-key "$MCP_REGISTRY_KEY"
+          ./mcp-publisher publish
