@@ -3,8 +3,8 @@ name: Release
 # Push a tag like v0.1.1 to publish that version to npm and the MCP Registry.
 # npm uses trusted publishing (OIDC), so there's no npm token in the repo
 # secrets. The MCP Registry login proves ownership of seamless.engineering
-# with the key whose public half is served at
-# https://seamless.engineering/.well-known/mcp-registry-auth.
+# with the key whose public half is in the domain's TXT record
+# (v=MCPv1; k=ed25519; p=...).
 on:
   push:
     tags: ["v*"]
@@ -40,5 +40,5 @@ jobs:
         env:
           MCP_REGISTRY_KEY: ${{ secrets.MCP_REGISTRY_KEY }}
         run: |
-          ./mcp-publisher login http --domain seamless.engineering --private-key "$MCP_REGISTRY_KEY"
+          ./mcp-publisher login dns --domain seamless.engineering --private-key "$MCP_REGISTRY_KEY"
           ./mcp-publisher publish
